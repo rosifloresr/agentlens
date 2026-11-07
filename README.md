@@ -3,11 +3,16 @@
 Run, trace and evaluate AI agents. See every step an agent takes (prompt, tool
 call, tokens, latency, cost) and catch regressions when a prompt changes.
 
-> Status: under construction. Phase 0 (foundations) in progress.
+## Development
 
-## Quick start
+    cd backend
+    uv sync
+    uv run pytest
+    uv run ruff check . && uv run ruff format --check . && uv run mypy app
 
-    cp .env.example .env
-    docker compose up --build
+Install the git hooks once:
 
-API docs: http://localhost:8000/docs
+    cd backend && uv run pre-commit install --config ../.pre-commit-config.yaml
+
+CI runs the same checks (lint, format, mypy strict, tests) plus a Docker build
+on every pull request.
